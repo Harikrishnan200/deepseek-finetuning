@@ -38,21 +38,46 @@ DTYPE_MAP = {
 }
 
 
-def resolve_compute_dtype(requested: str = "auto") -> torch.dtype:
-    """Pick the 4-bit compute dtype, preferring bfloat16 when the GPU supports it.
+def best_device() -> str:
+    """cuda > mps (Apple Silicon) > cpu."""
+    if torch.cuda.is_available():
+        return "cuda"
+    if torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
 
-    Kaggle's T4 (compute capability 7.5) does *not* support bf16 and must fall
-    back to fp16; P100/A100/L4 do.
+
+def resolve_compute_dtype(requested: str = "auto") -> torch.dtype:
+    """Pick the compute dtype for the current device.
+
+    On CUDA, prefer bfloat16 when supported (Kaggle's T4 is compute capability
+    7.5 and is not, so it falls back to fp16). On Apple Silicon, bfloat16 works.
+    On plain CPU, float16 matmuls are unsupported or crawl, so use float32.
     """
     if requested != "auto":
         return DTYPE_MAP[requested]
-    if torch.cuda.is_available() and torch.cuda.is_bf16_supported():
+    device = best_device()
+    if device == "cuda":
+        return torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    if device == "mps":
         return torch.bfloat16
-    return torch.float16
+    return torch.float32
 
 
 def build_quantization_config(quantization: dict[str, Any]) -> BitsAndBytesConfig | None:
+    """Build a 4-bit config, or None when quantization is off or unavailable.
+
+    bitsandbytes 4-bit kernels are CUDA-only. Rather than crashing on a laptop,
+    fall back to unquantized weights - a 1.5B model is ~3.5 GB in bf16, which is
+    fine for local inference.
+    """
     if not quantization.get("load_in_4bit", True):
+        return None
+    if not torch.cuda.is_available():
+        print(
+            "[warn] no CUDA GPU: bitsandbytes 4-bit is unavailable, loading "
+            "unquantized weights instead (needs ~3.5 GB of RAM)."
+        )
         return None
     return BitsAndBytesConfig(
         load_in_4bit=True,
@@ -87,6 +112,9 @@ def load_base_model(
         device_map="auto" if torch.cuda.is_available() else None,
         trust_remote_code=True,
     )
+    if quant_config is None and not torch.cuda.is_available():
+        # device_map is CUDA-only here, so place the model explicitly.
+        model = model.to(best_device())
     model.config.use_cache = not for_training
     return model
 

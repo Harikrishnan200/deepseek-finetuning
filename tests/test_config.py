@@ -153,3 +153,27 @@ def test_evaluation_config_gate_keys_present():
         "allow_overfitting",
     ):
         assert key in gate
+
+
+def test_compute_dtype_never_picks_float16_on_cpu():
+    """float16 matmul is unsupported/glacial on CPU; float32 is the safe default."""
+    import torch
+
+    from src.training.model import best_device, resolve_compute_dtype
+
+    dtype = resolve_compute_dtype("auto")
+    if best_device() == "cpu":
+        assert dtype is torch.float32
+    assert resolve_compute_dtype("bfloat16") is torch.bfloat16
+
+
+def test_quantization_disabled_without_cuda():
+    """4-bit is CUDA-only: fall back to unquantized rather than crashing."""
+    import torch
+
+    from src.training.model import build_quantization_config
+
+    config = build_quantization_config({"load_in_4bit": True, "quant_type": "nf4"})
+    if not torch.cuda.is_available():
+        assert config is None
+    assert build_quantization_config({"load_in_4bit": False}) is None
