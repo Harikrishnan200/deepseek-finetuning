@@ -43,6 +43,38 @@ def get_token() -> str:
     return token
 
 
+PLACEHOLDER_NAMESPACES = {
+    "your-real-hf-username", "your_username", "yourusername",
+    "YOUR_USERNAME", "username", "<username>",
+}
+
+
+def whoami() -> str:
+    """Resolve the Hub username that HF_TOKEN belongs to."""
+    from huggingface_hub import HfApi
+
+    info = HfApi(token=get_token()).whoami()
+    return info["name"]
+
+
+def resolve_model_id(model_id: str | None, default_name: str = "deepseek-personal-qlora") -> str:
+    """Fill in the namespace from the token when it is missing or a placeholder.
+
+    Hand-typed usernames are a reliable source of 403s, so prefer asking the Hub
+    who the token belongs to over trusting a string in a config file.
+    """
+    if model_id and "/" in model_id:
+        namespace, name = model_id.split("/", 1)
+        if namespace not in PLACEHOLDER_NAMESPACES:
+            return model_id
+        print(f"[hub] '{namespace}' is a placeholder - resolving your username from HF_TOKEN")
+        return f"{whoami()}/{name}"
+    name = model_id or default_name
+    user = whoami()
+    print(f"[hub] no namespace given - using your account: {user}")
+    return f"{user}/{name}"
+
+
 def build_model_card(
     model_id: str, config: Any, metadata: dict[str, Any], results: dict[str, Any] | None
 ) -> str:
@@ -167,7 +199,9 @@ def push_adapter(
             )
 
     token = get_token()
+    model_id = resolve_model_id(model_id)
     api = HfApi(token=token)
+    print(f"[hub] target repo: {model_id} (private={private})")
     api.create_repo(repo_id=model_id, private=private, exist_ok=True)
 
     card = build_model_card(model_id, config, metadata or {}, results)

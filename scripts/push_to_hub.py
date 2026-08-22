@@ -22,7 +22,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--config", default="configs/qlora.yaml")
     parser.add_argument("--adapter-path", default="artifacts/training/adapter")
-    parser.add_argument("--hub-model-id", required=True)
+    parser.add_argument(
+        "--hub-model-id",
+        default=None,
+        help="owner/name. Omit the owner (or the whole flag) to use the account HF_TOKEN belongs to.",
+    )
     parser.add_argument("--evaluation-dir", default="artifacts/evaluation")
     parser.add_argument("--public", action="store_true", help="create a public repo (default private)")
     parser.add_argument(

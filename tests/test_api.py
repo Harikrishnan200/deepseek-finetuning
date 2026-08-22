@@ -147,3 +147,28 @@ def test_adapter_reference_accepts_hub_ids_and_local_dirs(reference, expected):
     from src.inference.generate import is_adapter_reference
 
     assert is_adapter_reference(reference) is expected
+
+
+def test_resolve_model_id_passes_real_namespaces_through(monkeypatch):
+    """A genuine owner/name must not trigger a network call."""
+    import src.publish as publish
+
+    monkeypatch.setattr(publish, "whoami", lambda: pytest.fail("should not call the Hub"))
+    assert publish.resolve_model_id("someuser/my-adapter") == "someuser/my-adapter"
+
+
+@pytest.mark.parametrize("given", ["YOUR_USERNAME/my-adapter", "your-real-hf-username/my-adapter"])
+def test_resolve_model_id_replaces_placeholder_namespaces(monkeypatch, given):
+    """Placeholder namespaces caused 403s; substitute the token's real owner."""
+    import src.publish as publish
+
+    monkeypatch.setattr(publish, "whoami", lambda: "realuser")
+    assert publish.resolve_model_id(given) == "realuser/my-adapter"
+
+
+def test_resolve_model_id_fills_in_a_missing_namespace(monkeypatch):
+    import src.publish as publish
+
+    monkeypatch.setattr(publish, "whoami", lambda: "realuser")
+    assert publish.resolve_model_id(None) == "realuser/deepseek-personal-qlora"
+    assert publish.resolve_model_id("custom-name") == "realuser/custom-name"
