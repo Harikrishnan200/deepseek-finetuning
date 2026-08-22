@@ -1,0 +1,68 @@
+# Baseline QLoRA experiment. Copy this file to run variants (see configs/experiments/).
+run_name: exp-b-r16
+model_name: deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+seed: 42
+
+dataset:
+  raw: data/raw/personal_dataset.jsonl
+  train: data/processed/train.jsonl
+  validation: data/processed/validation.jsonl
+  test: data/processed/test.jsonl
+
+prompt:
+  # {instruction} and {response} are substituted. The text after `response_marker`
+  # is what the loss is computed on when train_on_completion_only is true.
+  template: "### Instruction:\n{instruction}\n\n### Response:\n{response}"
+  response_marker: "### Response:\n"
+  append_eos: true
+  train_on_completion_only: true
+
+split:
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  near_duplicate_threshold: 0.90
+  group_similar_instructions: true
+
+training:
+  output_dir: artifacts/experiments/exp-b-r16
+  num_train_epochs: 3
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  optim: paged_adamw_8bit
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 512
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  max_grad_norm: 0.3
+  logging_steps: 10
+  eval_steps: 50
+  save_steps: 50
+  save_total_limit: 2
+  gradient_checkpointing: true
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  task_type: CAUSAL_LM
+  # Leave empty to auto-detect from the real model architecture at runtime
+  # (src/training/model.py inspects the loaded module tree). Fill in only to override.
+  target_modules: []
+
+quantization:
+  load_in_4bit: true
+  quant_type: nf4
+  double_quant: true
+  # auto -> bfloat16 when the GPU supports it, else float16
+  compute_dtype: auto
+
+hub:
+  push_to_hub: false
+  model_id: null
+  private: true

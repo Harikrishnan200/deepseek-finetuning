@@ -1,0 +1,60 @@
+{
+  "split": {
+    "seed": 42,
+    "requested_ratios": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "near_duplicate_threshold": 0.9,
+    "group_similar_instructions": true,
+    "total_records": 889,
+    "total_groups": 713,
+    "largest_group_size": 16,
+    "singleton_groups": 593,
+    "multi_record_groups": 120,
+    "split_sizes": {
+      "train": 622,
+      "validation": 134,
+      "test": 133
+    },
+    "actual_ratios": {
+      "train": 0.6997,
+      "validation": 0.1507,
+      "test": 0.1496
+    },
+    "groups_per_split": {
+      "train": 446,
+      "validation": 134,
+      "test": 133
+    }
+  },
+  "leakage": {
+    "near_duplicate_threshold": 0.9,
+    "method": "normalized exact match + TF-IDF char n-gram cosine similarity",
+    "splits": {
+      "validation": {
+        "records": 134,
+        "exact_overlaps": 0,
+        "near_overlaps": 0,
+        "overlapping_records": 0,
+        "overlap_rate": 0.0,
+        "shared_group_ids": [],
+        "exact_overlap_examples": [],
+        "near_overlap_examples": []
+      },
+      "test": {
+        "records": 133,
+        "exact_overlaps": 0,
+        "near_overlaps": 0,
+        "overlapping_records": 0,
+        "overlap_rate": 0.0,
+        "shared_group_ids": [],
+        "exact_overlap_examples": [],
+        "near_overlap_examples": []
+      }
+    },
+    "max_overlap_rate": 0.0,
+    "leakage_free": true
+  }
+}

@@ -1,0 +1,1125 @@
+{
+  "near_duplicate_threshold": 0.9,
+  "method": "TF-IDF char_wb 3-5 grams, cosine similarity (local, no API)",
+  "policy": "detect and report only - no record is deleted automatically",
+  "total_records": 889,
+  "exact_duplicate_pair_groups": 7,
+  "exact_duplicate_redundant_records": 7,
+  "exact_duplicate_instruction_groups": 20,
+  "near_duplicate_instruction_pairs": 397,
+  "near_duplicate_response_pairs": 240,
+  "exact_duplicate_groups": [
+    [
+      211,
+      439
+    ],
+    [
+      216,
+      440
+    ],
+    [
+      247,
+      441
+    ],
+    [
+      324,
+      443
+    ],
+    [
+      365,
+      444
+    ],
+    [
+      370,
+      445
+    ],
+    [
+      375,
+      447
+    ]
+  ],
+  "exact_duplicate_instruction_id_groups": [
+    [
+      1,
+      607
+    ],
+    [
+      5,
+      853
+    ],
+    [
+      7,
+      854
+    ],
+    [
+      165,
+      437
+    ],
+    [
+      175,
+      438
+    ],
+    [
+      211,
+      439
+    ],
+    [
+      216,
+      440
+    ],
+    [
+      247,
+      441
+    ],
+    [
+      324,
+      443
+    ],
+    [
+      329,
+      442
+    ],
+    [
+      360,
+      446
+    ],
+    [
+      365,
+      444
+    ],
+    [
+      370,
+      445
+    ],
+    [
+      375,
+      447
+    ],
+    [
+      485,
+      611
+    ],
+    [
+      495,
+      604
+    ],
+    [
+      514,
+      634
+    ],
+    [
+      518,
+      638
+    ],
+    [
+      530,
+      716
+    ],
+    [
+      592,
+      839
+    ]
+  ],
+  "near_duplicate_instruction_examples": [
+    {
+      "left_id": 1,
+      "right_id": 607,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 5,
+      "right_id": 853,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 7,
+      "right_id": 854,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 165,
+      "right_id": 437,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 175,
+      "right_id": 438,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 211,
+      "right_id": 439,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 216,
+      "right_id": 440,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 247,
+      "right_id": 441,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 324,
+      "right_id": 443,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 329,
+      "right_id": 442,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 360,
+      "right_id": 446,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 365,
+      "right_id": 444,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 370,
+      "right_id": 445,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 375,
+      "right_id": 447,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 485,
+      "right_id": 611,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 495,
+      "right_id": 604,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 514,
+      "right_id": 634,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 518,
+      "right_id": 638,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 530,
+      "right_id": 716,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 592,
+      "right_id": 839,
+      "similarity": 1.0
+    },
+    {
+      "left_id": 73,
+      "right_id": 74,
+      "similarity": 0.9869
+    },
+    {
+      "left_id": 31,
+      "right_id": 32,
+      "similarity": 0.9869
+    },
+    {
+      "left_id": 37,
+      "right_id": 38,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 43,
+      "right_id": 44,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 49,
+      "right_id": 50,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 55,
+      "right_id": 56,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 61,
+      "right_id": 62,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 67,
+      "right_id": 68,
+      "similarity": 0.9868
+    },
+    {
+      "left_id": 42,
+      "right_id": 72,
+      "similarity": 0.9837
+    },
+    {
+      "left_id": 48,
+      "right_id": 72,
+      "similarity": 0.9837
+    },
+    {
+      "left_id": 54,
+      "right_id": 72,
+      "similarity": 0.9837
+    },
+    {
+      "left_id": 60,
+      "right_id": 72,
+      "similarity": 0.9837
+    },
+    {
+      "left_id": 66,
+      "right_id": 72,
+      "similarity": 0.9837
+    },
+    {
+      "left_id": 42,
+      "right_id": 48,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 42,
+      "right_id": 54,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 42,
+      "right_id": 60,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 42,
+      "right_id": 66,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 48,
+      "right_id": 54,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 48,
+      "right_id": 60,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 48,
+      "right_id": 66,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 54,
+      "right_id": 60,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 54,
+      "right_id": 66,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 60,
+      "right_id": 66,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 36,
+      "right_id": 72,
+      "similarity": 0.9835
+    },
+    {
+      "left_id": 36,
+      "right_id": 42,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 36,
+      "right_id": 48,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 36,
+      "right_id": 54,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 36,
+      "right_id": 60,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 36,
+      "right_id": 66,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 72,
+      "right_id": 78,
+      "similarity": 0.9833
+    },
+    {
+      "left_id": 42,
+      "right_id": 78,
+      "similarity": 0.9831
+    },
+    {
+      "left_id": 48,
+      "right_id": 78,
+      "similarity": 0.9831
+    },
+    {
+      "left_id": 54,
+      "right_id": 78,
+      "similarity": 0.9831
+    },
+    {
+      "left_id": 60,
+      "right_id": 78,
+      "similarity": 0.9831
+    },
+    {
+      "left_id": 66,
+      "right_id": 78,
+      "similarity": 0.9831
+    },
+    {
+      "left_id": 36,
+      "right_id": 78,
+      "similarity": 0.9829
+    },
+    {
+      "left_id": 561,
+      "right_id": 573,
+      "similarity": 0.9804
+    },
+    {
+      "left_id": 40,
+      "right_id": 70,
+      "similarity": 0.9787
+    },
+    {
+      "left_id": 46,
+      "right_id": 70,
+      "similarity": 0.9787
+    },
+    {
+      "left_id": 52,
+      "right_id": 70,
+      "similarity": 0.9787
+    },
+    {
+      "left_id": 58,
+      "right_id": 70,
+      "similarity": 0.9787
+    },
+    {
+      "left_id": 64,
+      "right_id": 70,
+      "similarity": 0.9787
+    },
+    {
+      "left_id": 40,
+      "right_id": 46,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 40,
+      "right_id": 52,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 40,
+      "right_id": 58,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 40,
+      "right_id": 64,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 46,
+      "right_id": 52,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 46,
+      "right_id": 58,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 46,
+      "right_id": 64,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 52,
+      "right_id": 58,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 52,
+      "right_id": 64,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 58,
+      "right_id": 64,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 34,
+      "right_id": 70,
+      "similarity": 0.9784
+    },
+    {
+      "left_id": 34,
+      "right_id": 40,
+      "similarity": 0.9782
+    },
+    {
+      "left_id": 34,
+      "right_id": 46,
+      "similarity": 0.9782
+    },
+    {
+      "left_id": 34,
+      "right_id": 52,
+      "similarity": 0.9782
+    },
+    {
+      "left_id": 34,
+      "right_id": 58,
+      "similarity": 0.9782
+    },
+    {
+      "left_id": 34,
+      "right_id": 64,
+      "similarity": 0.9782
+    },
+    {
+      "left_id": 70,
+      "right_id": 76,
+      "similarity": 0.9781
+    },
+    {
+      "left_id": 40,
+      "right_id": 76,
+      "similarity": 0.9779
+    },
+    {
+      "left_id": 46,
+      "right_id": 76,
+      "similarity": 0.9779
+    },
+    {
+      "left_id": 52,
+      "right_id": 76,
+      "similarity": 0.9779
+    },
+    {
+      "left_id": 58,
+      "right_id": 76,
+      "similarity": 0.9779
+    },
+    {
+      "left_id": 64,
+      "right_id": 76,
+      "similarity": 0.9779
+    },
+    {
+      "left_id": 34,
+      "right_id": 76,
+      "similarity": 0.9776
+    },
+    {
+      "left_id": 210,
+      "right_id": 276,
+      "similarity": 0.9766
+    },
+    {
+      "left_id": 41,
+      "right_id": 71,
+      "similarity": 0.9762
+    },
+    {
+      "left_id": 47,
+      "right_id": 71,
+      "similarity": 0.9762
+    },
+    {
+      "left_id": 53,
+      "right_id": 71,
+      "similarity": 0.9762
+    },
+    {
+      "left_id": 59,
+      "right_id": 71,
+      "similarity": 0.9762
+    },
+    {
+      "left_id": 65,
+      "right_id": 71,
+      "similarity": 0.9762
+    },
+    {
+      "left_id": 41,
+      "right_id": 47,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 41,
+      "right_id": 53,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 41,
+      "right_id": 59,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 41,
+      "right_id": 65,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 47,
+      "right_id": 53,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 47,
+      "right_id": 59,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 47,
+      "right_id": 65,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 53,
+      "right_id": 59,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 53,
+      "right_id": 65,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 59,
+      "right_id": 65,
+      "similarity": 0.976
+    },
+    {
+      "left_id": 35,
+      "right_id": 71,
+      "similarity": 0.9759
+    },
+    {
+      "left_id": 35,
+      "right_id": 41,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 35,
+      "right_id": 47,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 35,
+      "right_id": 53,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 35,
+      "right_id": 59,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 35,
+      "right_id": 65,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 71,
+      "right_id": 77,
+      "similarity": 0.9756
+    },
+    {
+      "left_id": 777,
+      "right_id": 801,
+      "similarity": 0.9754
+    },
+    {
+      "left_id": 41,
+      "right_id": 77,
+      "similarity": 0.9753
+    },
+    {
+      "left_id": 47,
+      "right_id": 77,
+      "similarity": 0.9753
+    },
+    {
+      "left_id": 53,
+      "right_id": 77,
+      "similarity": 0.9753
+    },
+    {
+      "left_id": 59,
+      "right_id": 77,
+      "similarity": 0.9753
+    },
+    {
+      "left_id": 65,
+      "right_id": 77,
+      "similarity": 0.9753
+    },
+    {
+      "left_id": 209,
+      "right_id": 275,
+      "similarity": 0.9751
+    },
+    {
+      "left_id": 35,
+      "right_id": 77,
+      "similarity": 0.975
+    },
+    {
+      "left_id": 123,
+      "right_id": 148,
+      "similarity": 0.9728
+    },
+    {
+      "left_id": 208,
+      "right_id": 274,
+      "similarity": 0.9721
+    },
+    {
+      "left_id": 39,
+      "right_id": 69,
+      "similarity": 0.9715
+    },
+    {
+      "left_id": 45,
+      "right_id": 69,
+      "similarity": 0.9715
+    },
+    {
+      "left_id": 51,
+      "right_id": 69,
+      "similarity": 0.9715
+    },
+    {
+      "left_id": 57,
+      "right_id": 69,
+      "similarity": 0.9715
+    },
+    {
+      "left_id": 63,
+      "right_id": 69,
+      "similarity": 0.9715
+    },
+    {
+      "left_id": 39,
+      "right_id": 45,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 39,
+      "right_id": 51,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 39,
+      "right_id": 57,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 39,
+      "right_id": 63,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 45,
+      "right_id": 51,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 45,
+      "right_id": 57,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 45,
+      "right_id": 63,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 51,
+      "right_id": 57,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 51,
+      "right_id": 63,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 57,
+      "right_id": 63,
+      "similarity": 0.9712
+    },
+    {
+      "left_id": 33,
+      "right_id": 69,
+      "similarity": 0.9711
+    },
+    {
+      "left_id": 122,
+      "right_id": 147,
+      "similarity": 0.971
+    },
+    {
+      "left_id": 33,
+      "right_id": 39,
+      "similarity": 0.9708
+    },
+    {
+      "left_id": 33,
+      "right_id": 45,
+      "similarity": 0.9708
+    },
+    {
+      "left_id": 33,
+      "right_id": 51,
+      "similarity": 0.9708
+    },
+    {
+      "left_id": 33,
+      "right_id": 57,
+      "similarity": 0.9708
+    },
+    {
+      "left_id": 33,
+      "right_id": 63,
+      "similarity": 0.9708
+    },
+    {
+      "left_id": 69,
+      "right_id": 75,
+      "similarity": 0.9707
+    },
+    {
+      "left_id": 39,
+      "right_id": 75,
+      "similarity": 0.9704
+    },
+    {
+      "left_id": 45,
+      "right_id": 75,
+      "similarity": 0.9704
+    },
+    {
+      "left_id": 51,
+      "right_id": 75,
+      "similarity": 0.9704
+    },
+    {
+      "left_id": 57,
+      "right_id": 75,
+      "similarity": 0.9704
+    },
+    {
+      "left_id": 63,
+      "right_id": 75,
+      "similarity": 0.9704
+    },
+    {
+      "left_id": 33,
+      "right_id": 75,
+      "similarity": 0.97
+    },
+    {
+      "left_id": 211,
+      "right_id": 277,
+      "similarity": 0.9699
+    },
+    {
+      "left_id": 277,
+      "right_id": 439,
+      "similarity": 0.9699
+    },
+    {
+      "left_id": 215,
+      "right_id": 235,
+      "similarity": 0.9698
+    },
+    {
+      "left_id": 87,
+      "right_id": 107,
+      "similarity": 0.9696
+    },
+    {
+      "left_id": 164,
+      "right_id": 189,
+      "similarity": 0.9681
+    },
+    {
+      "left_id": 155,
+      "right_id": 355,
+      "similarity": 0.9678
+    },
+    {
+      "left_id": 196,
+      "right_id": 355,
+      "similarity": 0.9678
+    },
+    {
+      "left_id": 237,
+      "right_id": 355,
+      "similarity": 0.9678
+    },
+    {
+      "left_id": 278,
+      "right_id": 355,
+      "similarity": 0.9678
+    },
+    {
+      "left_id": 319,
+      "right_id": 355,
+      "similarity": 0.9678
+    },
+    {
+      "left_id": 214,
+      "right_id": 234,
+      "similarity": 0.9677
+    },
+    {
+      "left_id": 86,
+      "right_id": 106,
+      "similarity": 0.9676
+    },
+    {
+      "left_id": 155,
+      "right_id": 196,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 155,
+      "right_id": 237,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 155,
+      "right_id": 278,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 155,
+      "right_id": 319,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 196,
+      "right_id": 237,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 196,
+      "right_id": 278,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 196,
+      "right_id": 319,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 237,
+      "right_id": 278,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 237,
+      "right_id": 319,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 278,
+      "right_id": 319,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 114,
+      "right_id": 355,
+      "similarity": 0.9674
+    },
+    {
+      "left_id": 114,
+      "right_id": 155,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 114,
+      "right_id": 196,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 114,
+      "right_id": 237,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 114,
+      "right_id": 278,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 114,
+      "right_id": 319,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 121,
+      "right_id": 146,
+      "similarity": 0.967
+    },
+    {
+      "left_id": 355,
+      "right_id": 386,
+      "similarity": 0.9669
+    },
+    {
+      "left_id": 155,
+      "right_id": 386,
+      "similarity": 0.9666
+    },
+    {
+      "left_id": 196,
+      "right_id": 386,
+      "similarity": 0.9666
+    },
+    {
+      "left_id": 237,
+      "right_id": 386,
+      "similarity": 0.9666
+    },
+    {
+      "left_id": 278,
+      "right_id": 386,
+      "similarity": 0.9666
+    },
+    {
+      "left_id": 319,
+      "right_id": 386,
+      "similarity": 0.9666
+    },
+    {
+      "left_id": 114,
+      "right_id": 386,
+      "similarity": 0.9662
+    },
+    {
+      "left_id": 163,
+      "right_id": 188,
+      "similarity": 0.9658
+    },
+    {
+      "left_id": 451,
+      "right_id": 860,
+      "similarity": 0.9649
+    },
+    {
+      "left_id": 124,
+      "right_id": 149,
+      "similarity": 0.9638
+    },
+    {
+      "left_id": 213,
+      "right_id": 233,
+      "similarity": 0.9626
+    },
+    {
+      "left_id": 85,
+      "right_id": 105,
+      "similarity": 0.9624
+    },
+    {
+      "left_id": 778,
+      "right_id": 802,
+      "similarity": 0.9622
+    },
+    {
+      "left_id": 162,
+      "right_id": 187,
+      "similarity": 0.96
+    },
+    {
+      "left_id": 216,
+      "right_id": 236,
+      "similarity": 0.9585
+    },
+    {
+      "left_id": 236,
+      "right_id": 440,
+      "similarity": 0.9585
+    },
+    {
+      "left_id": 88,
+      "right_id": 108,
+      "similarity": 0.9582
+    },
+    {
+      "left_id": 165,
+      "right_id": 190,
+      "similarity": 0.9556
+    },
+    {
+      "left_id": 190,
+      "right_id": 437,
+      "similarity": 0.9556
+    },
+    {
+      "left_id": 449,
+      "right_id": 450,
+      "similarity": 0.9538
+    },
+    {
+      "left_id": 554,
+      "right_id": 763,
+      "similarity": 0.9535
+    },
+    {
+      "left_id": 116,
+      "right_id": 119,
+      "similarity": 0.9512
+    },
+    {
+      "left_id": 37,
+      "right_id": 67,
+      "similarity": 0.9493
+    },
+    {
+      "left_id": 43,
+      "right_id": 67,
+      "similarity": 0.9493
+    }
+  ]
+}

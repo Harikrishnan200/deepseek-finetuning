@@ -1,0 +1,42 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Model weights / checkpoints are large and are produced on Kaggle
+artifacts/training/checkpoints/
+artifacts/training/adapter/
+artifacts/adapter/
+*.safetensors
+*.bin
+*.pt
+
+# The raw personal dataset stays local by default.
+# Remove these lines only if you deliberately want to version your dataset.
+data/raw/*.jsonl
+!data/raw/.gitkeep
+raw-dataset.jsonl
+*personal_dataset*.jsonl
+
+# The processed splits are just the raw dataset rearranged, so they carry the
+# same personal information. They are regenerated deterministically from the raw
+# file (seed 42), so nothing is lost by keeping them local:
+#   python scripts/prepare_dataset.py --config configs/qlora.yaml
+data/processed/*.jsonl
+!data/processed/.gitkeep
+
+# The generalization set restates personal facts in reworded form.
+# Delete this line if you are happy for it to be public.
+data/eval/generalization.jsonl
+# data/eval/general_knowledge.jsonl contains no personal information and IS committed.
+
+# Model answers about a real person.
+artifacts/evaluation/test_predictions.json
+
+.ipynb_checkpoints/
+.DS_Store

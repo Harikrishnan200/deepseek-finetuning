@@ -1,0 +1,108 @@
+name: validate
+
+# CPU-only. GPU training happens on Kaggle (notebooks/kaggle_train.ipynb) and is
+# deliberately never attempted here. No Hugging Face token is required.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install CPU-only dependencies
+        # requirements.txt (torch, bitsandbytes, ...) is intentionally NOT installed:
+        # nothing in this job needs a GPU stack.
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Unit tests
+        run: pytest --cov=src --cov-report=term-missing
+
+      - name: Validate config files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from src.training.config import load_config, load_evaluation_config
+          for path in sorted(Path("configs").rglob("*.yaml")):
+              if path.name == "evaluation.yaml":
+                  load_evaluation_config(path)
+              else:
+                  load_config(path)
+              print(f"ok  {path}")
+          PY
+
+      - name: Validate evaluation datasets
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          from src.data.schema import load_records
+          failed = False
+          for path in sorted(Path("data/eval").glob("*.jsonl")):
+              records, issues = load_records(path)
+              print(f"{path}: {len(records)} valid, {len(issues)} invalid")
+              if issues or not records:
+                  failed = True
+                  for issue in issues[:5]:
+                      print("  ", issue.to_dict())
+          sys.exit(1 if failed else 0)
+          PY
+
+      - name: Validate personal dataset schema (skipped when not committed)
+        run: python scripts/validate_dataset.py --strict
+
+      - name: Dataset duplicate + leakage checks (skipped when not committed)
+        run: python scripts/prepare_dataset.py --fail-on-leakage
+
+      - name: Check no secrets are committed
+        run: |
+          python - <<'PY'
+          import re, subprocess, sys
+          patterns = {
+              "Hugging Face token": r"hf_[A-Za-z0-9]{34,}",
+              "AWS access key": r"AKIA[0-9A-Z]{16}",
+              "generic private key": r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
+          }
+          files = subprocess.check_output(["git", "ls-files"], text=True).split()
+          skip = {".github/workflows/validate.yml"}
+          problems = []
+          for name in files:
+              if name in skip or name.endswith((".png", ".jpg", ".safetensors")):
+                  continue
+              try:
+                  text = open(name, encoding="utf-8", errors="ignore").read()
+              except OSError:
+                  continue
+              for label, pattern in patterns.items():
+                  if re.search(pattern, text):
+                      problems.append(f"{name}: possible {label}")
+          for problem in problems:
+              print("FAIL:", problem)
+          sys.exit(1 if problems else 0)
+          PY
+
+      - name: Verify no GPU work was attempted
+        run: |
+          python -c "import importlib.util, sys; \
+            sys.exit(1) if importlib.util.find_spec('torch') else print('ok: torch is absent, as intended')"

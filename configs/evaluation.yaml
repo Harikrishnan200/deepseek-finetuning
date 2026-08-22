@@ -1,0 +1,35 @@
+# Evaluation + promotion-gate configuration.
+seed: 42
+max_new_tokens: 128
+batch_size: 4
+
+# Sets evaluated at final-evaluation time.
+datasets:
+  test: data/processed/test.jsonl
+  train: data/processed/train.jsonl
+  validation: data/processed/validation.jsonl
+  generalization: data/eval/generalization.jsonl
+  general_knowledge: data/eval/general_knowledge.jsonl
+
+# Overfitting / underfitting heuristic thresholds (loss units, nats/token).
+overfitting:
+  # generalization_gap = final_validation_loss - final_training_loss
+  possible_overfitting_gap: 0.30
+  strong_overfitting_gap: 0.80
+  # relative rise of final val loss above the best val loss
+  val_loss_rise_ratio: 0.10
+
+underfitting:
+  # Heuristic only - see README. High absolute losses with a small gap.
+  high_loss_threshold: 2.00
+  small_gap_threshold: 0.10
+  min_relative_loss_improvement: 0.10
+
+# Promotion gate. A run is PASS only if every hard requirement is met.
+gate:
+  minimum_task_accuracy_improvement: 0.05   # fine-tuned - base, normalized exact match on test
+  minimum_generalization_improvement: 0.02  # fine-tuned - base, token F1 on generalization set
+  maximum_allowed_forgetting: 0.10          # base - fine-tuned, accuracy on general_knowledge
+  maximum_test_perplexity: 25.0
+  maximum_leakage_rate: 0.0                 # fraction of test items overlapping train
+  allow_overfitting: false

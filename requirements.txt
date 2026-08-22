@@ -1,0 +1,21 @@
+# Full GPU training stack. Install this on Kaggle / a CUDA machine.
+# CPU-only work (validation, splitting, tests, CI) only needs requirements-dev.txt.
+
+torch>=2.4.0
+transformers>=4.51.0
+datasets>=3.0.0
+peft>=0.14.0
+trl>=0.17.0
+accelerate>=1.2.0
+bitsandbytes>=0.45.0
+huggingface_hub>=0.28.0
+
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.5.0
+matplotlib>=3.9.0
+PyYAML>=6.0.1
+
+fastapi>=0.115.0
+uvicorn>=0.32.0
+pydantic>=2.9.0

@@ -1,0 +1,49 @@
+{
+  "source": "data/raw/personal_dataset.jsonl",
+  "total_records": 889,
+  "valid_records": 889,
+  "invalid_records": 0,
+  "duplicate_records": 7,
+  "duplicate_instructions": 20,
+  "dataset_sha256": "8fc4a751f6b108c84d28fc64e23dc1284282c0e9adcef3d2782636cac0b85ee9",
+  "instruction_statistics": {
+    "characters": {
+      "count": 889,
+      "min": 22,
+      "max": 109,
+      "mean": 56.18,
+      "median": 55,
+      "p95": 78
+    },
+    "words": {
+      "count": 889,
+      "min": 4,
+      "max": 15,
+      "mean": 8.41,
+      "median": 8,
+      "p95": 12
+    }
+  },
+  "response_statistics": {
+    "characters": {
+      "count": 889,
+      "min": 3,
+      "max": 961,
+      "mean": 77.34,
+      "median": 69,
+      "p95": 142
+    },
+    "words": {
+      "count": 889,
+      "min": 1,
+      "max": 156,
+      "mean": 12.8,
+      "median": 11,
+      "p95": 24
+    }
+  },
+  "estimated_tokens": 31236,
+  "estimated_tokens_note": "Character-based approximation at ~3.8 chars/token; no tokenizer is required so this runs in CPU-only CI.",
+  "issues_by_reason": {},
+  "issues": []
+}

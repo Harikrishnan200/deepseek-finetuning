@@ -1,0 +1,36 @@
+{"instruction": "What is 17 plus 26?", "response": "43", "category": "math"}
+{"instruction": "What is 12 multiplied by 12?", "response": "144", "category": "math"}
+{"instruction": "What is 100 divided by 4?", "response": "25", "category": "math"}
+{"instruction": "What is 9 squared?", "response": "81", "category": "math"}
+{"instruction": "Subtract 48 from 130. What is the result?", "response": "82", "category": "math"}
+{"instruction": "What is the remainder when 17 is divided by 5?", "response": "2", "category": "math"}
+{"instruction": "If a shirt costs 20 dollars and is discounted by 25 percent, what is the new price?", "response": "15", "category": "math"}
+{"instruction": "What is the sum of the first 5 positive integers?", "response": "15", "category": "math"}
+{"instruction": "Tom is taller than Ann, and Ann is taller than Sam. Who is the shortest?", "response": "Sam", "category": "reasoning"}
+{"instruction": "All roses are flowers. This object is a rose. Is it a flower? Answer yes or no.", "response": "yes", "category": "reasoning"}
+{"instruction": "A train leaves at 3 PM and the journey takes 2 hours. What time does it arrive?", "response": "5 PM", "category": "reasoning"}
+{"instruction": "If today is Wednesday, what day will it be in three days?", "response": "Saturday", "category": "reasoning"}
+{"instruction": "A box holds 6 eggs. How many boxes are needed for 20 eggs?", "response": "4", "category": "reasoning"}
+{"instruction": "Which is heavier, one kilogram of iron or one kilogram of feathers?", "response": "neither", "category": "reasoning"}
+{"instruction": "What is the capital city of France?", "response": "Paris", "category": "factual"}
+{"instruction": "Which planet is known as the Red Planet?", "response": "Mars", "category": "factual"}
+{"instruction": "How many continents are there on Earth?", "response": "7", "category": "factual"}
+{"instruction": "What is the chemical symbol for water?", "response": "H2O", "category": "factual"}
+{"instruction": "Who wrote the play Romeo and Juliet?", "response": "Shakespeare", "category": "factual"}
+{"instruction": "What is the largest ocean on Earth?", "response": "Pacific", "category": "factual"}
+{"instruction": "In which country is the Great Pyramid of Giza located?", "response": "Egypt", "category": "factual"}
+{"instruction": "How many days are there in a leap year?", "response": "366", "category": "factual"}
+{"instruction": "In Python, which keyword defines a function?", "response": "def", "category": "python"}
+{"instruction": "In Python, what does the len() function return for a list?", "response": "the number of elements", "category": "python"}
+{"instruction": "Which Python data type stores unique unordered values?", "response": "set", "category": "python"}
+{"instruction": "In Python, what symbol starts a single-line comment?", "response": "#", "category": "python"}
+{"instruction": "Which Python keyword is used to handle exceptions after try?", "response": "except", "category": "python"}
+{"instruction": "What Python method adds an item to the end of a list?", "response": "append", "category": "python"}
+{"instruction": "In Python, what does the range(3) function produce?", "response": "0 1 2", "category": "python"}
+{"instruction": "What does HTTP stand for?", "response": "HyperText Transfer Protocol", "category": "general"}
+{"instruction": "What does SQL stand for?", "response": "Structured Query Language", "category": "general"}
+{"instruction": "What does CPU stand for?", "response": "Central Processing Unit", "category": "general"}
+{"instruction": "How many bits are in one byte?", "response": "8", "category": "general"}
+{"instruction": "What does JSON stand for?", "response": "JavaScript Object Notation", "category": "general"}
+{"instruction": "Which data structure works on a last-in-first-out principle?", "response": "stack", "category": "general"}
+{"instruction": "Which data structure works on a first-in-first-out principle?", "response": "queue", "category": "general"}
