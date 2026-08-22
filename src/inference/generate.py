@@ -15,6 +15,25 @@ from src.training.model import load_base_model, load_finetuned_model, load_token
 DEFAULT_TEMPLATE = "### Instruction:\n{instruction}\n\n### Response:\n{response}"
 
 
+def is_adapter_reference(adapter_path: str | Path) -> bool:
+    """True when this points at a loadable adapter: a local dir or a Hub repo id.
+
+    Without the Hub case, passing "user/my-adapter" would look like a missing
+    local path and the base model would be served instead - silently producing
+    results that have nothing to do with the fine-tune.
+    """
+    path = Path(adapter_path)
+    if path.exists():
+        return True
+    text = str(adapter_path)
+    # Hub ids are "owner/name"; reject anything that looks like a filesystem path.
+    return (
+        text.count("/") == 1
+        and not text.startswith((".", "/", "~"))
+        and all(part.strip() for part in text.split("/"))
+    )
+
+
 class Generator:
     """Loads the base model (plus an optional LoRA adapter) once and reuses it."""
 
@@ -29,12 +48,16 @@ class Generator:
         self.template = template
         self.tokenizer = load_tokenizer(model_name)
         self.tokenizer.padding_side = "left"
-        if adapter_path and Path(adapter_path).exists():
+        if adapter_path and is_adapter_reference(adapter_path):
+            # Either a local directory or a Hugging Face Hub repo id - PEFT accepts both.
             self.model = load_finetuned_model(model_name, str(adapter_path), quantization)
             self.adapter_path = str(adapter_path)
         else:
             if adapter_path:
-                print(f"[warn] adapter not found at {adapter_path}; serving the base model")
+                print(
+                    f"[warn] adapter not found at {adapter_path}; serving the BASE model. "
+                    "Results below are NOT from your fine-tune."
+                )
             self.model = load_base_model(model_name, quantization, for_training=False)
             self.adapter_path = None
         self.model.eval()

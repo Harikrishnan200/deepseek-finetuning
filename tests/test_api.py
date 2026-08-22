@@ -127,3 +127,23 @@ def test_publish_allowlist_holds_only_aggregate_reports():
     assert "test_predictions.json" in BLOCKED_NAMES
     assert "personal_dataset.jsonl" in BLOCKED_NAMES
     assert not any(name.endswith(".jsonl") for name in PUBLISHABLE_ARTIFACTS)
+
+
+@pytest.mark.parametrize(
+    "reference,expected",
+    [
+        ("Harikrishnan200/deepseek-personal-qlora", True),   # Hub repo id
+        ("owner/name", True),
+        ("configs", True),                                   # existing local dir
+        ("no-such-directory", False),
+        ("./adapter", False),                                # explicit relative path
+        ("/tmp/definitely/missing", False),
+        ("a/b/c", False),                                    # too deep to be a Hub id
+        ("owner/", False),
+    ],
+)
+def test_adapter_reference_accepts_hub_ids_and_local_dirs(reference, expected):
+    """A Hub id must not be mistaken for a missing path - that silently serves the base model."""
+    from src.inference.generate import is_adapter_reference
+
+    assert is_adapter_reference(reference) is expected
