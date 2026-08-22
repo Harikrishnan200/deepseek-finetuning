@@ -350,3 +350,24 @@ def test_report_describes_quantization_honestly():
     # A config with 4-bit disabled must not be reported as 4-bit.
     assert "disabled" in _describe_quantization({"load_in_4bit": False, "quant_type": "nf4"})
     assert _describe_quantization({}) == "n/a"
+
+
+def test_gate_handles_a_missing_generalization_set():
+    """A private/absent optional eval set must warn, never silently pass or crash."""
+    results = passing_results()
+    del results["generalization"]          # simulates data/eval/generalization.jsonl absent
+    result = evaluate_gate(results)
+    assert result["verdict"] == PASS_WITH_WARNINGS
+    assert result["promote"] is False
+    assert any("generalization" in w for w in result["warnings"])
+    assert "generalization_improvement" not in [c["name"] for c in result["checks"]]
+
+
+def test_final_report_renders_without_optional_sections():
+    results = passing_results()
+    del results["generalization"]
+    del results["forgetting"]
+    results["gate"] = evaluate_gate(results)
+    report = render_final_report(results)
+    assert "## Generalization" in report and "## Catastrophic Forgetting" in report
+    assert "Not measured." in report

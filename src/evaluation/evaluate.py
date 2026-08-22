@@ -178,8 +178,11 @@ def run_full_evaluation(
     train_records, _ = load_records(paths["train"])
     val_records, _ = load_records(paths["validation"])
     test_records, _ = load_records(paths["test"])
-    gen_records, _ = load_records(paths["generalization"])
-    gk_records, _ = load_records(paths["general_knowledge"])
+    # The generalization set restates personal facts, so it is private by default
+    # and may be absent from a fresh clone. Missing optional sets downgrade the
+    # gate to a warning rather than aborting the whole evaluation.
+    gen_records = _load_optional(paths.get("generalization"), "generalization")
+    gk_records = _load_optional(paths.get("general_knowledge"), "general knowledge")
 
     results: dict[str, Any] = {
         "dataset": {
@@ -248,8 +251,10 @@ def run_full_evaluation(
 
         # Cache the generated answers so the comparison functions below do not
         # need both models resident at once.
-        generalization_fns[label] = _replay(generate_fn([r.instruction for r in gen_records]))
-        forgetting_fns[label] = _replay(generate_fn([r.instruction for r in gk_records]))
+        if gen_records:
+            generalization_fns[label] = _replay(generate_fn([r.instruction for r in gen_records]))
+        if gk_records:
+            forgetting_fns[label] = _replay(generate_fn([r.instruction for r in gk_records]))
 
         del model
         if torch.cuda.is_available():
@@ -267,30 +272,34 @@ def run_full_evaluation(
         },
         "primary_metric": "normalized_exact_match",
     }
-    results["generalization"] = compare_generalization(
-        gen_records,
-        generalization_fns["base"],
-        generalization_fns["fine_tuned"],
-        train=train_records,
-        threshold=threshold,
-    )
-    results["forgetting"] = compare_forgetting(
-        gk_records,
-        forgetting_fns["base"],
-        forgetting_fns["fine_tuned"],
-        maximum_allowed_forgetting=eval_config["gate"]["maximum_allowed_forgetting"],
-    )
+    if gen_records:
+        results["generalization"] = compare_generalization(
+            gen_records,
+            generalization_fns["base"],
+            generalization_fns["fine_tuned"],
+            train=train_records,
+            threshold=threshold,
+        )
+    if gk_records:
+        results["forgetting"] = compare_forgetting(
+            gk_records,
+            forgetting_fns["base"],
+            forgetting_fns["fine_tuned"],
+            maximum_allowed_forgetting=eval_config["gate"]["maximum_allowed_forgetting"],
+        )
     results["gate"] = evaluate_gate(results, eval_config["gate"])
 
     write_json(output_dir / "perplexity.json", results["perplexity"])
     write_json(output_dir / "base_vs_finetuned.json", {
         "perplexity": results["perplexity"],
         "task": results["task"],
-        "generalization": results["generalization"],
-        "forgetting": results["forgetting"],
+        "generalization": results.get("generalization"),
+        "forgetting": results.get("forgetting"),
     })
-    write_json(output_dir / "generalization.json", results["generalization"])
-    write_json(output_dir / "forgetting_report.json", results["forgetting"])
+    if "generalization" in results:
+        write_json(output_dir / "generalization.json", results["generalization"])
+    if "forgetting" in results:
+        write_json(output_dir / "forgetting_report.json", results["forgetting"])
     write_json(output_dir / "gate.json", results["gate"])
     write_json(output_dir / "evaluation.json", results)
     (output_dir / "final_report.md").write_text(render_final_report(results), encoding="utf-8")
@@ -309,6 +318,20 @@ def run_full_evaluation(
 
     print(f"\n[gate] verdict: {results['gate']['verdict']}")
     return results
+
+
+def _load_optional(path: str | Path | None, label: str) -> list[Record]:
+    """Load an optional evaluation set, returning [] (with a warning) if absent."""
+    if not path:
+        return []
+    if not Path(path).exists():
+        print(
+            f"[warn] {label} set not found at {path} - skipping that evaluation. "
+            "The promotion gate will record this as a warning, not a pass."
+        )
+        return []
+    records, _ = load_records(path)
+    return records
 
 
 def _replay(outputs: list[str]):
