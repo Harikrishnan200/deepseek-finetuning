@@ -9,7 +9,7 @@ Training runs on Kaggle's free GPU. Validation and tests run on GitHub Actions
 (CPU only). The adapter is distributed via the Hugging Face Hub. No paid API, no
 cloud provider, no managed tracking service.
 
-[![validate](https://github.com/YOUR_USERNAME/llm-personal-finetuning/actions/workflows/validate.yml/badge.svg)](https://github.com/YOUR_USERNAME/llm-personal-finetuning/actions/workflows/validate.yml)
+[![validate](https://github.com/Harikrishnan200/deepseek-finetuning/actions/workflows/validate.yml/badge.svg)](https://github.com/Harikrishnan200/deepseek-finetuning/actions/workflows/validate.yml)
 
 ---
 
@@ -587,12 +587,12 @@ export HF_TOKEN=hf_...   # write-scoped token from https://huggingface.co/settin
 python scripts/push_to_hub.py \
     --config configs/qlora.yaml \
     --adapter-path artifacts/training/adapter \
-    --hub-model-id YOUR_USERNAME/deepseek-personal-qlora \
+    --hub-model-id Harikrishnan200/deepseek-personal-qlora \
     --require-pass
 ```
 
 Or during training: `python scripts/train_qlora.py --config configs/qlora.yaml
---push-to-hub --hub-model-id YOUR_USERNAME/deepseek-personal-qlora`.
+--push-to-hub --hub-model-id Harikrishnan200/deepseek-personal-qlora`.
 
 Uploaded: adapter weights, tokenizer, a generated model card (base model, LoRA
 config, parameter counts, prompt format, evaluation summary, gate verdict, usage
