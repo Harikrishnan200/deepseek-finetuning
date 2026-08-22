@@ -64,5 +64,6 @@ quantization:
 
 hub:
   push_to_hub: false
-  model_id: null
+  # Leave the namespace out and scripts/push_to_hub.py resolves it from HF_TOKEN.
+  model_id: Harikrishnan2003/deepseek-personal-qlora
   private: true

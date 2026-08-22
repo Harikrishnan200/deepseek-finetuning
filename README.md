@@ -587,12 +587,12 @@ export HF_TOKEN=hf_...   # write-scoped token from https://huggingface.co/settin
 python scripts/push_to_hub.py \
     --config configs/qlora.yaml \
     --adapter-path artifacts/training/adapter \
-    --hub-model-id Harikrishnan200/deepseek-personal-qlora \
+    --hub-model-id Harikrishnan2003/deepseek-personal-qlora \
     --require-pass
 ```
 
 Or during training: `python scripts/train_qlora.py --config configs/qlora.yaml
---push-to-hub --hub-model-id Harikrishnan200/deepseek-personal-qlora`.
+--push-to-hub --hub-model-id Harikrishnan2003/deepseek-personal-qlora`.
 
 Uploaded: adapter weights, tokenizer, a generated model card (base model, LoRA
 config, parameter counts, prompt format, evaluation summary, gate verdict, usage
